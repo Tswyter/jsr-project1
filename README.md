@@ -1,6 +1,6 @@
 # Chatbot!
 
-## Our favorite AI nemesis, HAL9000 vs. Dave Bowman
+## Our favorite AI nemesis, HAL9000 vs. Dave Bowman (Taylor Version)
 
 * Construct a chatbot that responds to various inputs from Dave
 * Feel free to use the HTML and CSS scaffolds or construct your own
