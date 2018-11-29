@@ -105,11 +105,10 @@ html, body {
 
 body {
   background: #444;
-
   color: #ccc;
   font-size: 14px;
   /* Helvetica/Arial-based sans serif stack */
-  font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
 
@@ -141,58 +140,56 @@ body {
   overscroll-behavior: contain contain;
 }
 
-.dave {
+.message {
   display: flex;
+}
+
+.message p {
+  display: inline;
+  padding: 0.5rem;
+  color: #333;
+  border-radius: 3px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.message p::before {
+  content: '';
+  position: absolute;
+  border: 5px solid transparent;
+  top: 50%;
+}  
+
+.user {
   justify-content: flex-end;
   padding-left: 20%;
 }
 
-.dave p {
+.user p {
   background-color: #cdcdcd;
-  display: inline;
-  padding: 0.5rem;
-  color: #333;
-  border-radius: 3px;
-  position: relative;
-  box-sizing: border-box;
 }
 
-.dave p::before {
-    content: '';
-    position: absolute;
-    border: 5px solid transparent;
-    border-top: 5px solid #cdcdcd;
-    border-right: 5px solid #cdcdcd;
-    top: 50%;
-    left: calc(100% - 10px);
-    transform: rotate(45deg) translateY(-50%);
-  }
-
-.hal {
-    display: flex;
-    justify-content: flex-start;
-    padding-right: 20%;
+.user p::before {
+  border-top-color: #cdcdcd;
+  border-right-color: #cdcdcd;
+  left: calc(100% - 10px);
+  transform: rotate(45deg) translateY(-50%);
 }
 
-.hal p {
+.bot {
+  justify-content: flex-start;
+  padding-right: 20%;
+}
+
+.bot p {
   background-color: skyblue;
-  display: inline;
-  padding: 0.5rem;
-  color: #333;
-  border-radius: 3px;
-  position: relative;
-  box-sizing: border-box;
 }
 
-.hal p::before {
-  content: '';
-  position: absolute;
-  border: 5px solid transparent;
-  border-top: 5px solid skyblue;
-  border-left: 5px solid skyblue;
-  top: 50%;
+.bot p::before {
+  border-top-color: skyblue;
+  border-right-color: skyblue;
   right: calc(100% - 10px);
-  transform: rotate(-45deg) translateY(-50%);
+  transform: rotate(-135deg) translateY(-50%);
 }
 
 .chat-input {
@@ -214,20 +211,22 @@ body {
     border-bottom-right-radius: 3px;
 }
 
+.optionButtons button {
+  padding: 1rem;
+  color: #333;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #cdcdcd;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .chat-input #chatInput {
-  padding: 10px;
+  padding: 1rem;
   width: 100%;
   height: 100%;
   background-color: transparent;
   border: none;
-}
-
-#hal {
-  background-color: silver;
-}
-
-#dave {
-  background-color: pink;
 }
 
 /* ==========================================================================
