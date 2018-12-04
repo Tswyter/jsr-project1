@@ -68,61 +68,71 @@ const processResponse = (input) => {
           botResponds(`I wasn't able to find a character by the name ${input}. Try a different name.`);
         }
       }
-    }
+    };
+    xhr.onerror = () => {
+      console.log('Oops there seems to be an error with the request.');
+      botResponds('Oh no... I forgot EVERYTHING about Star Wars. Check back later. Hopefully I will remember by then.');
+    };
   } else if (convoLevel === 2) {
     const { name, gender, home_planet, hair_color, height, eye_color, birth_year } = userData.favoriteCharacter;
     switch(sanitizedInput) {
       case 'gender':
-        botResponds(`${name} is a ${gender}.`);
+        if (gender !== 'undefined') {
+          botResponds(`${name} is a ${gender}.`);
+        } else {
+          botResponds(`I'm not sure what gender ${name} is, unfortunately.`);
+        }
         break;
       case 'home planet':
-        botResponds(`${name} is from ${home_planet}.`)
+        if (home_planet !== 'undefined' || typeof home_planet !== 'undefined') {
+          botResponds(`${name} is from ${home_planet}.`);
+        } else {
+          botResponds(`Unfortunately, I don't know where ${name} is from.`);
+        }
         break;
       case 'hair color':
-        botResponds(`${name} has ${hair_color} hair.`);
+
+        if (hair_color !== 'undefined') {
+          botResponds(`${name} has ${hair_color} hair.`);
+        } else {
+          botResponds(`Oh, I'm not sure what ${name}'s hair color is.`);
+        }
         break;
       case 'height':
-        botResponds(`${name} is ${height}cm tall.`)
+        if (height !== 'undefined') {
+          botResponds(`${name} is ${height}cm tall.`);
+        } else {
+          botResponds(`I don't know how tall ${name} is.`)
+        }
         break;
       case 'eye color':
-        botResponds(`${name} has ${eye_color} eyes.`);
+        
+        if (eye_color !== 'undefined') {
+          botResponds(`${name} has ${eye_color} eyes.`);
+        } else {
+          botResponds(`You got me. I have no idea what color ${name}'s eyes are!`)
+        }
         break;
       case 'birth year':
-        botResponds(`${name} was born on ${birth_year}`);
+        if (birth_year !== 'undefined') {
+          botResponds(`${name} was born on ${birth_year}`);
+        } else {
+          botResponds(`I don't know how old ${name} is.`);
+        }
         break;
       default:
         botResponds(`Oh, so I guess you want to talk about some other aspect?`);
         break;
     }
+
+    setTimeout(() => {
+      botResponds(`What else can I tell you about ${name}?`);
+      presentOptions(['home planet', 'gender', 'hair color', 'height', 'eye color', 'birth year']);  
+    }, 1000);
     
   } else {
     botResponds(`Aww, really? I guess we won't have much to talk about. I only care about Star Wars.`);
-  
   }
-
-  // if (checkFor('hi') || checkFor('hello') || checkFor('good morning') || checkFor('good evening') || checkFor('good day')) {
-  //   botResponds(`How are you today, ${userData.name}?`);
-  
-  // } else if (checkFor(`not ${userData.name}`)) {
-  //   botResponds(`Oh, you're not ${userData.name}? What is your name then?`);
-
-  // } else if (checkFor('my name is')) {
-  //   userData.name = input.split('is')[1];
-  //   botResponds(`Oh, nice to meet you, ${userData.name}.`);
-  
-  // } else if (checkFor('not morning')) {
-  //   botResponds(`Oh, really? What time is it?`);
-  
-  // } else if (checkFor('What is my name')) {
-  //   botResponds(`Your name is ${userData.name}.`);
-
-  // } else if (checkFor('What can you do')) {
-  //   botResponds(`I can't do much at the moment. Check back later!`)
-  
-  // } else {
-  //   botResponds(`What? You're talking nonsense.`);
-  // }
-
 };
 
 const botResponds = (input) => {
@@ -134,7 +144,6 @@ const presentOptions = (options) => {
   chatArea.innerHTML += `<div class="optionButtons ${random}">${options.map(button => `<button data-value="${button}">${button}</button>`).join('')}</div>`;
   const optionButtons = document.querySelectorAll(`.${random} button`);
   optionButtons.forEach(button => button.addEventListener('click', e => {
-    console.log(e.target.dataset);
     processResponse(e.target.dataset.value);
   }))
 };
